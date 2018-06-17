@@ -1,5 +1,5 @@
 # Project-Euler
-#### Some solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
+#### My solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
 
 ![Project Euler](https://projecteuler.net/profile/LzyRapx.png)
 
