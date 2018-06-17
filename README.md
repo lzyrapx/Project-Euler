@@ -1,5 +1,5 @@
 # Project-Euler
-#### Some solutions on [Project Euler](https://projecteuler.net/archives). Some codes are written a long time ago, please ignore them, they are ugly...
+#### Some solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its rules.
 
 ![Project Euler](https://projecteuler.net/profile/LzyRapx.png)
 
