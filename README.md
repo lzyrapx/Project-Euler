@@ -1,7 +1,7 @@
 # Project-Euler
 #### My solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
 
-(主要是因为我被PE管理员私信警告Post My code outside了, 因此代码被我移除了QwQ...)
+##### (主要是因为我被PE管理员私信警告Post My code outside了, 因此代码被我移除了QwQ...)
 
 ![Project Euler](https://projecteuler.net/profile/LzyRapx.png)
 
