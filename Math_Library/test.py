@@ -23,3 +23,20 @@ print(extended_gcd(3,6)) #  3*x + 6*y = gcd(3, 6) => (gcd(3,6), x, y) => (3,1,0)
 from base import padic_base_p
 print(padic_base_p(10,2)) # 1010
 print(padic_base_p(10,3)) # 101
+
+from base import iter_associate, sum_power_series_mod
+def f(a, b):
+    s = 1
+    for i in range(1, a):
+        s *= i
+    print("a = {} b = {} s = {} ".format(a, b, s))
+    return s
+print(iter_associate(f, 4, 3)) # 120
+print(sum_power_series_mod(1,100,19260817))
+
+from base import rational_continous_frac
+print(rational_continous_frac(415,93,10000)) # (4,2,6,7)
+
+from base import continous_frac_convergent
+print(continous_frac_convergent([4,2,6,7])) # [Fraction(4, 1), Fraction(9, 2), Fraction(58, 13), Fraction(415, 93)]
+print(float(continous_frac_convergent([4,2,6,7])[2]))
