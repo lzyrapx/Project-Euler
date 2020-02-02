@@ -19,3 +19,7 @@ print(cprod([2,3,5,7,11,12]))
 print(ggcd([11,22,33]))
 
 print(extended_gcd(3,6)) #  3*x + 6*y = gcd(3, 6) => (gcd(3,6), x, y) => (3,1,0)
+
+from base import padic_base_p
+print(padic_base_p(10,2)) # 1010
+print(padic_base_p(10,3)) # 101
