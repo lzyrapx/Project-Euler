@@ -14,7 +14,16 @@ Tree Generation functions:
                     When forward is True, return all three children of current PPT.
                     When forward is False, return its parent in the PPT tree.
                     details see: https://en.wikipedia.org/wiki/Tree_of_primitive_Pythagorean_triples
-    
+    co_prime_tree(pair=(0, 0), trust=False):
+                    All co-prime pairs can be generated from (2, 1) (for (odd, even) 
+                    and (even, odd) pairs) and (3, 1) (for (odd, odd) pairs).
+                    It follows a trinary tree, from co-prime pair (a, b), we get: (2*a - b, a), (2*a + b, a), (a + 2*b, b)
+                    It can be shown that the co-prime pairs in the tree are disjoint complete.
+    stern_brocot_tree():
+                    Stern-Brocot Tree, an infinite complete binary tree in which the vertices 
+                    correspond one-for-one to the positive rational numbers, 
+                    whose values are ordered from left to right as in a search tree. It related to Farey series closely.
+                    details see: https://en.wikipedia.org/wiki/Stern%E2%80%93Brocot_tree
 """
 import numpy as np
 from math import gcd, sqrt
@@ -53,7 +62,8 @@ def pythagorean_triple_tree(triple=(3, 4, 5), forward=True, trust=False):
 
 def co_prime_tree(pair=(0, 0), trust=False):
     """
-    All co-prime pairs can be generated from (2, 1) (for (odd, even) and (even, odd) pairs) and (3, 1) (for (odd, odd) pairs).
+    All co-prime pairs can be generated from (2, 1) (for (odd, even) 
+    and (even, odd) pairs) and (3, 1) (for (odd, odd) pairs).
     It follows a trinary tree, from co-prime pair (a, b), we get: (2*a - b, a), (2*a + b, a), (a + 2*b, b)
     It can be shown that the co-prime pairs in the tree are disjoint complete.
     """
