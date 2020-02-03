@@ -411,8 +411,3 @@ def irrational_continous_frac(d, p=0, q=1, limit=100):
         pairspq.append((p, q))
         repetend.append(a)
     raise ValueError("Repetend is longer than {0:d}, please try higher limit!".format(limit))
-
-
-
-
-

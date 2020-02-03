@@ -3,6 +3,7 @@
 @Github: https://github.com/LzyRapx
 @Date: 2020-02-01 16:29:08
 '''
+import time
 from base import _is_square, _factorial, fac
 from base import _iroot, cprod, ggcd
 from base import extended_gcd
@@ -40,3 +41,20 @@ print(rational_continous_frac(415,93,10000)) # (4,2,6,7)
 from base import continous_frac_convergent
 print(continous_frac_convergent([4,2,6,7])) # [Fraction(4, 1), Fraction(9, 2), Fraction(58, 13), Fraction(415, 93)]
 print(float(continous_frac_convergent([4,2,6,7])[2]))
+
+
+from treeGeneration import pythagorean_triple_tree
+print(pythagorean_triple_tree())
+print(pythagorean_triple_tree((5,12,13),forward=False, trust=True))
+
+from treeGeneration import stern_brocot_tree
+res = stern_brocot_tree()
+print("test...")
+while True:
+    g = next(res)
+    print(g)
+    if g[0] == 1 and g[1] == 4:
+        print(g)
+        break
+    time.sleep(1)
+print("stern_brocot_tree: ", next(res))
