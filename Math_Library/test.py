@@ -50,11 +50,26 @@ print(pythagorean_triple_tree((5,12,13),forward=False, trust=True))
 from treeGeneration import stern_brocot_tree
 res = stern_brocot_tree()
 print("test...")
-while True:
-    g = next(res)
-    print(g)
-    if g[0] == 1 and g[1] == 4:
-        print(g)
-        break
-    time.sleep(1)
-print("stern_brocot_tree: ", next(res))
+# while True:
+#     g = next(res)
+#     print(g)
+#     if g[0] == 1 and g[1] == 4:
+#         print(g)
+#         break
+#     time.sleep(1)
+# print("stern_brocot_tree: ", next(res))
+
+#########################################
+from prime import _primes_list, _is_prime, _mobius_list
+p = _primes_list(100)
+print(p)
+
+Is_p = _is_prime(97)
+print(Is_p)
+
+mobius_list = _mobius_list(100)
+print(len(mobius_list))
+print(mobius_list[0])
+print(mobius_list[100])
+
+

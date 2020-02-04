@@ -50,11 +50,8 @@ except:
     isqrt = None
     iroot = None
 
-try:
-    from . ext.c_formula_int64 import c_sum_mod_int64
-    sum_mod = c_sum_mod_int64
-except:
-    sum_mod = None
+
+sum_mod = None
 
 # Supplementry implementations
 def _is_square(n):
