@@ -10,7 +10,8 @@ prime-related functions:
     _primes_list(n): Returns a array of primes, 2 <= p < n
     _is_prime(p, accuracy=100): Miller-Rabin primality test
                                           https://en.wikipedia.org/wiki/Miller-Rabin_primality_test
-    _mobius_list(n): return mobius function mu(k) for 0 <= k <= 
+    _mobius_list(n): return mobius function mu(k) for 0 <= k <= n
+    
 """
 import random
 import numpy as np
