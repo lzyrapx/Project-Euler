@@ -9,9 +9,11 @@
 prime-related functions:
     _primes_list(n): Returns a array of primes, 2 <= p < n
     _is_prime(p, accuracy=100): Miller-Rabin primality test
-                                          https://en.wikipedia.org/wiki/Miller-Rabin_primality_test
+                                details see: https://en.wikipedia.org/wiki/Miller-Rabin_primality_test
     _mobius_list(n): return mobius function mu(k) for 0 <= k <= n
-    
+    _pollard_rho(n, rand=True): return a non-trivial(not one or n) factor of n
+                                Pollard rho prime factorization algorithm
+                                details see: https://en.wikipedia.org/wiki/Pollard's_rho_algorithm 
 """
 import random
 import numpy as np
@@ -104,3 +106,24 @@ def _mobius_list(n):
 
 if mobius_list is None:
     mobius_list = _mobius_list
+
+def _pollard_rho(n, rand=True):
+    """
+    return a non-trivial(not one or n) factor of n.
+    Pollard rho prime factorization algorithm
+    https://en.wikipedia.org/wiki/Pollard's_rho_algorithm
+    """
+
+    f = lambda x, c: x*x + c
+    if not rand:
+        x, c = 1, 1
+    else:
+        x, c = random.randrange(2, 1e6), random.randrange(2, 1e6)
+
+    y, d = x, 1
+    while d == 1 and d != n:
+        x = f(x, c) % n
+        y = f(y, c) % n
+        y = f(y, c) % n
+        d = gcd(y-x, n)
+    return int(d)

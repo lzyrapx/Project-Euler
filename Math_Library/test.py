@@ -72,4 +72,7 @@ print(len(mobius_list))
 print(mobius_list[0])
 print(mobius_list[100])
 
+from prime import _pollard_rho
+print(_pollard_rho(1000))
+
 
