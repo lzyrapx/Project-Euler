@@ -72,7 +72,9 @@ print(len(mobius_list))
 print(mobius_list[0])
 print(mobius_list[100])
 
-from prime import _pollard_rho
+from prime import _pollard_rho,prime_divisor_decomposition, all_divisors
 print(_pollard_rho(1000))
+print(prime_divisor_decomposition(10**12+2000))
+print(all_divisors(10 ** 9))
 
 

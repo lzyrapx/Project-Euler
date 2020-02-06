@@ -13,7 +13,12 @@ prime-related functions:
     _mobius_list(n): return mobius function mu(k) for 0 <= k <= n
     _pollard_rho(n, rand=True): return a non-trivial(not one or n) factor of n
                                 Pollard rho prime factorization algorithm
-                                details see: https://en.wikipedia.org/wiki/Pollard's_rho_algorithm 
+                                details see: https://en.wikipedia.org/wiki/Pollard's_rho_algorithm
+    prime_divisor_decomposition(n, rand=True):
+                                Prime factor decomposition
+                                writing n as a product of prime factors. To factorise a number, 
+                                divide it by the first possible prime number.
+    all_divisors(n, rand=False): return all divisors of n as a sorted list
 """
 import random
 import numpy as np
@@ -127,3 +132,77 @@ def _pollard_rho(n, rand=True):
         y = f(y, c) % n
         d = gcd(y-x, n)
     return int(d)
+
+P10K = primes_list(10000)
+P10Kset = set(P10K)
+def prime_divisor_decomposition(n, rand=True):
+    dlist, clist = [], []
+
+    # 奇偶性判断
+    c = 0
+    while n % 2 == 0:
+        n //= 2
+        c += 1
+    if c:
+        dlist.append(2)
+        clist.append(c)
+
+    # 首先用10000以内的小素数试除
+    for p in iter(P10K):
+        c = 0
+        while n % p == 0:
+            n //= p
+            c += 1
+        if c:
+            dlist.append(p)
+            clist.append(c)
+
+        if n == 1:
+            return list(zip(dlist, clist))
+
+        if n in P10Kset:  # set的in操作复杂度<=O(log(n))
+            dlist.append(n)
+            clist.append(1)
+            return list(zip(dlist, clist))
+
+        n = int(n)
+
+    # 然后用Pollard rho方法生成素因子
+    while 1:
+        if n == 1:
+            return list(zip(dlist, clist))
+
+        if is_prime(n):
+            dlist.append(n)
+            clist.append(1)
+            return list(zip(dlist, clist))
+
+        p = _pollard_rho(n, rand)
+        c = 0
+        while n % p == 0:
+            n //= p
+            c += 1
+        dlist.append(p)
+        clist.append(c)
+
+        n = int(n)
+
+def all_divisors(n, rand=False):
+    if n == 1:
+        return [1]
+
+    primefactors = prime_divisor_decomposition(n, rand)
+    d = len(primefactors)
+    clist = [0] * d
+    output = []
+    while 1:
+        output.append(cprod([primefactors[i][0]**clist[i] for i in range(d)]))
+        k = 0
+        while 1:
+            clist[k] += 1
+            if clist[k] <= primefactors[k][1]:
+                break
+            clist[k] = 0
+            k += 1
+            if k >= d:
+                return sorted(output)
