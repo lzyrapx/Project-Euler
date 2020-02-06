@@ -25,7 +25,7 @@ prime-related functions:
     mobius(n):  return mobius function mu(n)
                 details see: http://oeis.org/A008683
     _largest_prime_factor_sieve(n): return largest prime divisor of n <= sqrt(n), 1 if n is prime or 1. for 0 <= k <= n
-                      details: http://oeis.org/A217581
+                                    details: http://oeis.org/A217581
     prime_counting(n): a simple implementation of extended Meissel-Lehmer algorithm
                        return number of prime numbers <= x, with both time and space complexity O(x^2/3)
                        details see: http://oeis.org/A006880

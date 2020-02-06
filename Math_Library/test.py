@@ -86,7 +86,12 @@ for i in range(1, 100):
 print()
 print(_largest_prime_factor_sieve(18))
 print(_largest_prime_factor_sieve(25))
-print(prime_counting(10 ** 9))
+print(prime_counting(10 ** 5))
+
+###############################################
+from combinatoric import C, C_mod
+print(C(4,2))
+print(C_mod(4,2,11))
 
 
 
