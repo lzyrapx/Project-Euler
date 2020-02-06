@@ -77,4 +77,16 @@ print(_pollard_rho(1000))
 print(prime_divisor_decomposition(10**12+2000))
 print(all_divisors(10 ** 9))
 
+from prime import euler_phi, mobius, _largest_prime_factor_sieve,prime_counting
+for i in range(1, 100):
+    print(euler_phi(i), end=" ")
+print()
+for i in range(1, 100):
+    print(mobius(i), end=" ")
+print()
+print(_largest_prime_factor_sieve(18))
+print(_largest_prime_factor_sieve(25))
+print(prime_counting(10 ** 9))
+
+
 
