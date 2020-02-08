@@ -15,6 +15,21 @@ combinatoric related functions:
     permutations_multiset(n): Calculate number of permutations of multiset, which defined by
                             n = [n1, n2, ...] or n = [n1, n1, n2...]
     list_multiset_permutations(multiset): List out all permutations of a multiset [a, a, ..., b, b, ..., c, c, ...]
+    limited_combinations(choices): Generate all combinations [x1, x2, ..., xn] which subjected to
+                                   limited choices [[possible choices for xi] for i in 1..n]
+                                   e.g. limited_combinations([[1, 2], [3, 4]]) == [[1, 3], [1, 4], [2, 3], [2, 4]]
+                                        limited_combinations([[2, 2], [3, 4]]) == [[2, 3], [2, 4], [2, 3], [2, 4]]
+    all_subsets(fullset, xmin=1, xmax=None): return all subsets of the fullset, minimum and maximum set size can be specified
+                                             xmin: minimum subset size
+                                             xmax: maximum subset size
+                                             e.g. all_subsets([1, 2, 3], 1, None) = [[1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
+    all_partitions(n, s, xmin=1, xmax=None): make n partitions of s, return all possible partitions
+                                             xmin: minimum partition size
+                                             xmax: maximum partition size
+                                             e.g. all_partition(3, 5) == [[1, 1, 3], [1, 2, 2]]
+    sequence_partitions(sequence, p): list all permutations of the sequence satisfying given partition p
+                                      e.g. seq_partition([1, 2, 3], [1, 2]) == [[[1], [2, 3]], [[2], [1, 3]], [[3], [1, 2]]]
+                                      e.g. seq_partition([1, 2, 3], [1, 2]) == [[[1], [2, 3]], [[2], [1, 3]], [[3], [1, 2]]]
 """
 
 def C(n, k):
@@ -141,3 +156,90 @@ def list_multiset_permutations(multiset):
                 i = k
             head, afteri = k, i.to
             yield visit(head)
+
+def limited_combinations(choices):
+    """
+    Generate all combinations [x1, x2, ..., xn] which subjected to
+    limited choices [[possible choices for xi] for i in 1..n]
+    e.g. limited_combinations([[1, 2], [3, 4]]) == [[1, 3], [1, 4], [2, 3], [2, 4]]
+    """
+
+    if len(choices) == 1:
+        for x in choices[0]:
+            yield [x]
+    else:
+        for x in choices[0]:
+            for remains in limited_combinations(choices[1:]):
+                yield [x] + remains
+
+def all_subsets(fullset, xmin=1, xmax=None):
+    """
+    return all subsets of the fullset as a tuple, minimum and maximum set size can be specified
+    xmin: minimum subset size
+    xmax: maximum subset size
+    
+    e.g. all_subsets([1, 2, 3], 1, None) = [[1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
+    """
+
+    from itertools import combinations
+
+    if len(fullset) < xmin:
+        raise ValueError("Minimum subset size too large!")
+
+    if xmax is None:
+        xmax = len(fullset)
+
+    for i in range(xmin, xmax+1):
+        for subset in combinations(fullset, i):
+            yield subset
+
+def all_partitions(n, Sum, xmin=1, xmax=None):
+    """
+    make n partitions of Sum, return all possible partitions
+    xmin: minimum partition size
+    xmax: maximum partition size
+    e.g. all_partition(3, 5) == [[1, 1, 3], [1, 2, 2]]
+    """
+
+    if xmax is None:
+        if n == 1:
+            yield [Sum]
+        else:
+            for i in range(xmin, Sum // n + 1):
+                for result in all_partitions(n-1, Sum-i, i, xmax):
+                    yield [i] + result
+    else:
+        if Sum > n * xmax:
+            yield None
+        elif n == 1:
+            yield [Sum]
+        else:
+            for i in range(max(xmin, Sum-(n-1)*xmax), min(Sum//n, xmax)+1):
+                for result in all_partitions(n-1, Sum-i, i, xmax):
+                    if result is not None:
+                        yield [i] + result
+
+
+def sequence_partitions(sequence, p):
+    """
+    list all permutations of the sequence satisfying given partition p
+    e.g. sequence_partition([1, 2, 3], [1, 2]) == [[[1], [2, 3]], [[2], [1, 3]], [[3], [1, 2]]]
+    e.g. sequence_partition([1, 2, 3, 4], [2, 2]) == [[[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]], [[2, 3], [1, 4]], [[2, 4], [1, 3]], [[3, 4], [1, 2]]]
+    """
+
+    from itertools import combinations
+
+    if len(sequence) != sum(p):
+        raise ValueError("The length of sequence doesn't match given partition!")
+
+    if len(p) == 1:
+        output = []
+        for subp in combinations(sequence, p[0]):
+            output += [[list(subp)]]
+        return output
+    else:
+        output = []
+        for subp in combinations(sequence, p[0]):
+            newseq = [ele for ele in sequence if ele not in subp]
+            output += [[list(subp)] + s for s in sequence_partitions(newseq, p[1:])]
+        return output

@@ -100,7 +100,25 @@ print(permutations_multiset([1,1]))
 
 print(permutations_multiset([1,1,1]))
 for lists in list_multiset_permutations([1,2,3]):
+    print(lists, end=" ")
+
+from combinatoric import limited_combinations
+from combinatoric import all_subsets, all_partitions, sequence_partitions
+
+for lists in limited_combinations([[2, 2],[3, 4]]):
+    print(lists, end=" ")
+
+print("\nall_subsets testing...")
+for lists in all_subsets([1, 2, 3, 4], 1, None):
+    print(lists, end=" ")
+
+print("\nall_partitions testing...")
+for lists in all_partitions(3, 5):
     print(lists)
+
+print(sequence_partitions([1, 2, 3], [1, 2]))
+print(sequence_partitions([1, 2, 3, 4], [2, 2]))
+print(sequence_partitions([2, 3, 4, 5, 6], [2, 3]))
 
 
 
