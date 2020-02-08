@@ -1,3 +1,8 @@
+'''
+@Author: zhaoyang.liang
+@Github: https://github.com/LzyRapx
+@Date: 2020-02-01 16:17:23
+'''
 #coding: utf-8
 __author__ = 'LzyRapx'
 
@@ -12,7 +17,8 @@ def get_title(soup):
 
 def get_info(soup):
     # get raw info section
-    raw_info = soup.find('span', {'style': 'left:-400px;width:450px;font-size:80%;'})
+    raw_info = soup.find('span', {'style': 'left:-250px;width:250px;top:30px;'})
+    # print("raw info = ", raw_info)
     # get published, solved, and difficulty information using regex
     published = re.search(r'Published on (.+);', str(raw_info))
     solved = re.search(r'Solved by (\d+)', str(raw_info))
@@ -66,6 +72,7 @@ def scrape(problem):
     soup = BeautifulSoup(raw_html, 'html.parser')
     # get raw problem content
     problem_content = soup.find('div', {'class': 'problem_content'})
+
     return {
         'number': problem,
         'url': url,
