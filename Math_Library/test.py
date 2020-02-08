@@ -89,9 +89,18 @@ print(_largest_prime_factor_sieve(25))
 print(prime_counting(10 ** 5))
 
 ###############################################
-from combinatoric import C, C_mod
+from combinatoric import C, C_mod, permutations_multiset
+from combinatoric import list_multiset_permutations
 print(C(4,2))
 print(C_mod(4,2,11))
+print(C_mod(1000000, 123123, 10 ** 9 + 7))
+print(permutations_multiset([1,2]))
+print(permutations_multiset([1,1]))
+
+
+print(permutations_multiset([1,1,1]))
+for lists in list_multiset_permutations([1,2,3]):
+    print(lists)
 
 
 
