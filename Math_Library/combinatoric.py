@@ -28,7 +28,7 @@ combinatoric related functions:
                                              xmax: maximum partition size
                                              e.g. all_partition(3, 5) == [[1, 1, 3], [1, 2, 2]]
     sequence_partitions(sequence, p): list all permutations of the sequence satisfying given partition p
-                                      e.g. seq_partition([1, 2, 3], [1, 2]) == [[[1], [2, 3]], [[2], [1, 3]], [[3], [1, 2]]]
+                                      e.g. sequence_partition([1, 2, 3], [1, 2]) == [[[1], [2, 3]], [[2], [1, 3]], [[3], [1, 2]]]
                                       e.g. sequence_partition([1, 2, 3, 4], [2, 2]) == [[[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]], [[2, 3], [1, 4]], [[2, 4], [1, 3]], [[3, 4], [1, 2]]]
 """
 
