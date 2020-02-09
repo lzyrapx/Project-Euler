@@ -10,6 +10,7 @@ prime-related functions:
     _primes_list(n): Returns a array of primes, 2 <= p < n
     _is_prime(p, accuracy=100): Miller-Rabin primality test
                                 details see: https://en.wikipedia.org/wiki/Miller-Rabin_primality_test
+    _is_coprime(a, b): return whether a and b are coprime
     _mobius_list(n): return mobius function mu(k) for 0 <= k <= n
     _pollard_rho(n, rand=True): return a non-trivial(not one or n) factor of n
                                 Pollard rho prime factorization algorithm
@@ -29,6 +30,9 @@ prime-related functions:
     prime_counting(n): a simple implementation of extended Meissel-Lehmer algorithm
                        return number of prime numbers <= x, with both time and space complexity O(x^2/3)
                        details see: http://oeis.org/A006880
+    atkin_prime_sieve(limit=1000000): finding all prime numbers up to limit, O(n) time complexity, O(n) memory.
+                                      Sieve of Atkin, which is a much stronger version than sieve of Eratosthenes
+                                      details see: https://en.wikipedia.org/wiki/Sieve_of_Atkin
 """
 import random
 import numpy as np
@@ -37,9 +41,13 @@ from base import cprod, gcd, sqrt, isqrt
 
 try:
     from gmpy2 import is_prime
+    from gmpy2 import sqrt, gcd
 except:
+    from math import sqrt
+    from fractions import gcd
     is_prime = None
 
+is_coprime = None
 primes_list = None
 mobius_list = None
 largest_prime_factor_sieve = None
@@ -97,6 +105,14 @@ def _is_prime(p, accuracy=100):
 
 if is_prime is None:
     is_prime = _is_prime
+
+def _is_coprime(a, b):
+    """return whether a and b are coprime"""
+
+    return gcd(a, b) == 1
+
+if is_coprime is None:
+    is_coprime = _is_coprime
 
 def _mobius_list(n):
     """return mobius function mu(k) for 0 <= k <= n"""
@@ -377,3 +393,91 @@ def prime_counting(x):
         p = q
 
     return res
+
+def atkin_prime_sieve(limit=1000000):
+    """
+    finding all prime numbers up to limit. O(n) time complexity, O(n) memory
+    Sieve of Atkin, which is a much stronger version than sieve of Eratosthenes
+    details see: https://en.wikipedia.org/wiki/Sieve_of_Atkin
+    """
+
+    plist = [0] * limit
+
+    # n = 3x^2 + y^2 section
+    x = 3
+    for i in range(0, 12*int(sqrt((limit-1)/3)), 24):
+        x += i
+        y_limit = int(12*sqrt(limit-x)-36)
+        n = x + 16
+        for j in range(-12, y_limit+1, 72):
+            n += j
+            plist[n] = not plist[n]
+
+        n = x + 4
+        for j in range( 12, y_limit+1, 72):
+            n += j
+            plist[n] = not plist[n]
+
+    # n = 4x^2 + y^2 section
+    x = 0
+    for i in range(4, 8*int(sqrt((limit-1)/4))+4, 8):
+        x += i
+        n = x + 1
+        if x % 3:
+            for j in range(0, 4*int(sqrt(limit-x))-3, 8):
+                n += j
+                plist[n] = not plist[n]
+        else:
+            y_limit = 12 * int(sqrt(limit-x)) - 36
+            
+            n = x + 25
+            for j in range(-24, y_limit+1, 72):
+                n += j
+                plist[n] = not plist[n]
+
+            n = x + 1
+            for j in range( 24, y_limit+1, 72):
+                n += j
+                plist[n] = not plist[n]
+
+    # n = 3x^2 - y^2 section
+    x = 1
+    for i in range(3, int(sqrt(limit/2))+1, 2):
+        x += 4 * i - 4
+        n = 3 * x
+        if n > limit:
+            y = (int(sqrt(n-limit)) >> 2) << 2
+            n -= y * y
+            s = 4 * y + 4
+        else:
+            s = 4
+
+        for j in range(s, 4*i, 8):
+            n -= j
+            if n <= limit and n % 12 == 11:
+                plist[n] = not plist[n]
+
+    x = 0
+    for i in range(2, int(sqrt(limit/2))+1, 2):
+        x += 4 * i - 4
+        n = 3 * x
+
+        if n > limit:
+            y = ((int(sqrt(n-limit)) >> 2) << 2) - 1
+            n -= y * y
+            s = 4 * y + 4
+        else:
+            n -= 1
+            s = 0
+
+        for j in range(s, 4*i, 8):
+            n -= j
+            if n <= limit and n % 12 == 11:
+                plist[n] = not plist[n]
+
+    # eliminate squares        
+    for n in range(5, int(sqrt(limit))+1, 2):
+        if plist[n]:
+            for k in range(n*n, limit, n*n):
+                plist[k] = False
+    return [2,3] + list(filter(plist.__getitem__, range(5,limit,2)))

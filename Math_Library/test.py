@@ -60,10 +60,11 @@ print("test...")
 # print("stern_brocot_tree: ", next(res))
 
 #########################################
-from prime import _primes_list, _is_prime, _mobius_list
+from prime import _primes_list, _is_prime, _mobius_list, atkin_prime_sieve
 p = _primes_list(100)
 print(p)
-
+p = atkin_prime_sieve(100)
+print("atkin_prime_sieve = ", p)
 Is_p = _is_prime(97)
 print(Is_p)
 
@@ -77,7 +78,7 @@ print(_pollard_rho(1000))
 print(prime_divisor_decomposition(10**12+2000))
 print(all_divisors(10 ** 9))
 
-from prime import euler_phi, mobius, _largest_prime_factor_sieve,prime_counting
+from prime import euler_phi, mobius, _largest_prime_factor_sieve, prime_counting
 for i in range(1, 100):
     print(euler_phi(i), end=" ")
 print()
@@ -87,6 +88,10 @@ print()
 print(_largest_prime_factor_sieve(18))
 print(_largest_prime_factor_sieve(25))
 print(prime_counting(10 ** 5))
+
+from prime import is_coprime
+print("is_coprime: ", is_coprime(4, 5))
+print("is_coprime: ", is_coprime(4, 2))
 
 ###############################################
 from combinatoric import C, C_mod, permutations_multiset

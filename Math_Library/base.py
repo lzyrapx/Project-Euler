@@ -20,6 +20,7 @@ normal functions:
    max_subarray(array): return max sum of any continous subarray of an array
 
 modulo functions:
+   power_mod(a, b, mod): return (a ** b) % mod
    _sum_mod(n): return n % 2 + n % 3 + ... + n % (n-1)
    inv_mod(n, m): return n^(-1) mod m using Extended Euclid Algorith
    fac_mod(n, m): return return n! % m
@@ -218,6 +219,21 @@ def _sum_mod(n):
 
 if sum_mod is None:
     sum_mod = _sum_mod
+
+def power_mod(a, b, mod):
+    """return (a ** b) % mod"""
+    
+    r = a % mod
+    if r in (0, 1):
+        return r
+    
+    r = 1
+    while b:
+        if b % 2:
+            r = (r * a) % mod
+        b /= 2
+        a = (a * a) % mod
+    return r % mod
 
 def inv_mod(n, m):
     """return n^(-1) mod m using Extended Euclid Algorithm"""
