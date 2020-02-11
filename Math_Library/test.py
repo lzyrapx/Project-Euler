@@ -4,6 +4,7 @@
 @Date: 2020-02-01 16:29:08
 '''
 import time
+import numpy as np
 from base import _is_square, _factorial, fac
 from base import _iroot, cprod, ggcd
 from base import extended_gcd
@@ -124,6 +125,15 @@ for lists in all_partitions(3, 5):
 print(sequence_partitions([1, 2, 3], [1, 2]))
 print(sequence_partitions([1, 2, 3, 4], [2, 2]))
 print(sequence_partitions([2, 3, 4, 5, 6], [2, 3]))
+
+##################################
+from polynomial import poly_truncate, poly_add
+print(poly_truncate(np.array([0,1,2,3,4,5,0]), "left")) # [1,2,3,4,5,0]
+print(poly_truncate(np.array([0,1,2,3,4,5,0]), "right")) # [0,1,2,3,4,5]
+print(poly_add(np.array([1,2,3,4,5]), np.array([5,4,3,2,1])))
+print(poly_add(np.array([1,2,3,4,5]), np.array([1,2,3])))
+from polynomial import poly_mul
+print(poly_mul(np.array([1,2,3,4,5]),np.array([1,2,3])))
 
 
 
