@@ -136,4 +136,15 @@ from polynomial import poly_mul
 print(poly_mul(np.array([1,2,3,4,5]),np.array([1,2,3])))
 
 
+##################################
+from linearAlgebra import dot_mod, dot_mod_as_list
+A = np.array([[1,2,3],[1,4,5]])
+B = np.array([[2,3,4],[5,2,3]])
+print(dot_mod(A, B, 1997))
+print(dot_mod(A, B, 10))
+A = [[1,2,3],[1,4,5]]
+B = [[2,3,4],[5,2,3]]
+print(dot_mod_as_list(A, B, 1997))
+
+
 
