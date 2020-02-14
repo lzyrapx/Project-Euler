@@ -1,3 +1,8 @@
+'''
+@Author: zhaoyang.liang
+@Github: https://github.com/LzyRapx
+@Date: 2020-02-14 21:44:54
+'''
 
 """
 Functions implementing maths in linear algebra.
@@ -11,6 +16,10 @@ function list:
                                   @A, B(list)
     mat_pow_mod(mat, n, mod=0): return (mat^n) % mod
                                 @mat(np.array)
+    mat_pow_mod_as_list(mat, n, mod=0): return (mat^n) % mod
+                           mat is defined as list, avoid overflow in numpy
+                           @mat(list)
+    mat_sum_pow_mod(A0, Q, n, mod=0): return (A0 + Q A0 + Q^2 A0 + ... + Q^n A0) % mod
 """
 #coding: utf-8
 
@@ -67,25 +76,77 @@ def dot_mod_as_list(A, B, mod=0):
             C[i][j] = cij
     return C
 
-def mat_pow_mod(mat, n, mod=0):
+def mat_pow_mod(mat, n, Mod=0):
     """
-    return (mat^n) % mod
+    return (mat^n) %  Mod
     """
 
     if n < 0:
-        raise ValueError("power must be positive!")
+        raise ValueError("power n must be positive!")
 
     d = len(mat)
+    l = len(mat[0])
     res = np.eye(d, dtype=np.int64)
     while n:
         if n & 1:
-            if mod:
-                res = np.mod(np.dot(res, mat), mod)
+            if Mod:
+                res = np.mod(np.dot(res, mat), Mod)
             else:
                 res = np.dot(res, mat)
-        if mod:
-            mat = np.mod(np.dot(mat, mat), mod)
+        if Mod:
+            mat = np.mod(np.dot(mat, mat), Mod)
         else:
             mat = np.dot(mat, mat)
         n >>= 1
     return res
+
+def mat_pow_mod_as_list(mat, n, mod=0):
+    """
+    return (mat^n) % mod
+    mat is defined as list, avoid overflow in numpy
+    @mat(list)
+    """
+
+    if n < 0:
+        raise ValueError("power n must be positive!")
+
+    d = len(mat)
+    res = [[0] * d for _ in range(d)]
+    for i in range(d):
+        res[i][i] = 1
+
+    while n:
+        if n & 1:
+            res = dot_mod_as_list(res, mat, mod)
+        mat = dot_mod_as_list(mat, mat, mod)
+        n >>= 1
+    return res
+
+def mat_sum_pow_mod(A0, Q, n, mod=0):
+    """
+    return (A0 + Q A0 + Q^2 A0 + ... + Q^n A0) % mod
+    """
+
+    if n < 0:
+        raise ValueError("power n must be positive!")
+    if n == 0:
+        return A0
+    assert len(A0) == len(Q[0])
+
+    if m:
+        A0 = A0 % mod
+        Q = Q % mod
+
+    d = len(Q)
+    O = np.zeros((d, d), dtype=np.int64)
+    I = np.eye(d, dtype=np.int64)
+    Q_ext = np.concatenate([np.concatenate([Q, I], axis=1), np.concatenate([O, I], axis=1)])
+    Q_ext_pow = mat_pow_mod(Q_ext, n, mod)
+    I2 = np.concatenate([I, I], axis=0)
+    res = np.dot(Q_ext_pow, I2)
+    if mod:
+        res %= mod
+    res = np.dot(res, A0)
+    if mod:
+        res %= mod
+    return res[:d]
