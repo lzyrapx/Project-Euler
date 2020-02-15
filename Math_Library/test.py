@@ -138,13 +138,28 @@ print(poly_mul(np.array([1,2,3,4,5]),np.array([1,2,3])))
 
 ##################################
 from linearAlgebra import dot_mod, dot_mod_as_list
+from linearAlgebra import mat_pow_mod_as_list, mat_pow_mod
 A = np.array([[1,2,3],[1,4,5]])
-B = np.array([[2,3,4],[5,2,3]])
+B = np.array(([2,3,4],[5,2,3],[0,0,0]))
 print(dot_mod(A, B, 1997))
 print(dot_mod(A, B, 10))
+print("mat_pow_mod = ", mat_pow_mod(B, 10, 1997))
 A = [[1,2,3],[1,4,5]]
 B = [[2,3,4],[5,2,3]]
 print(dot_mod_as_list(A, B, 1997))
+print("mat_pow_mod = ", mat_pow_mod_as_list(B, 10, 1997))
+
+from linearAlgebra import gauss_jordan_elimination, gauss_jordan_modular_elimination
+A = [[3.0 ,2.0, 1.0, 6.0], [2.0, 2.0, 2.0, 4.0], [4.0, -2.0, -2.0, 2.0]] # ans = [1, 2, -1]
+print(gauss_jordan_elimination(A))
+A = [[3 ,2, 1, 6], [2, 2, 2, 4], [4, -2, -2, 2]] # ans = [1, 2, -1]
+print(gauss_jordan_modular_elimination(A, 1997))
+from linearAlgebra import get_integer_matrix_inverse_as_list
+A = [[1, 2, 3], [2, 2, 1], [3, 4, 3]]
+B = [[1, 2, 3], [3, 4, 6], [4, 6, 5]]
+print(get_integer_matrix_inverse_as_list(A))
+print(get_integer_matrix_inverse_as_list(B))
+
 
 
 
