@@ -160,6 +160,23 @@ B = [[1, 2, 3], [3, 4, 6], [4, 6, 5]]
 print(get_integer_matrix_inverse_as_list(A))
 print(get_integer_matrix_inverse_as_list(B))
 
+######################################################
 
+from equation import linear_modulo_equation
+print(linear_modulo_equation(2,3,1997))
+from equation import square_modulo_prime_equation
+print(square_modulo_prime_equation(5, 41))
+from equation import square_modulo_prime_power_equation
+print(square_modulo_prime_power_equation(5,41,19))
+from equation import chinese_remainder_theorem
+print(chinese_remainder_theorem([[2,3],[3,5],[2,7]])) # 23
+from equation import generalized_pell_equation_base, generalized_pell_equation_generator
+print(generalized_pell_equation_base(2))
+print("res = ", next(generalized_pell_equation_generator(2, 8))) # x^2 - 2 * y^2 = 8
+
+from equation import berlekamp_massey, berlekamp_massey_with_bound
+fib = np.array([1,1,2,3,5,8,13,21,34,55,89,144])
+print(berlekamp_massey(fib))
+print(berlekamp_massey_with_bound(fib, 1))
 
 
