@@ -13,7 +13,7 @@
 #### max(Rank) = 2nd
 |Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|
 |------:|---:|------:|---:|------:|---:|------:|---:|------:|---:|
-|704||||||||||
+|704|18|||||||||
 
 |Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|
 |------:|---:|------:|---:|------:|---:|------:|---:|------:|---:|
