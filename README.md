@@ -27,7 +27,7 @@
 |715|15|||||||||
 |716|20|||||||||
 |717|95||||||||
-|718||||||||||
+|718|15|||||||||
 |719||||||||||
 
 |Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|
