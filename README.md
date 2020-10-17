@@ -8,7 +8,7 @@
 
 #### This Repo will not share any solutions but I will share my math library as soon as possible.
 
-![Project Euler](https://projecteuler.net/profile/LzyRapx.png)
+![Project Euler](https://projecteuler.net/profile/lzyrapx.png)
 
 #### max(Rank) = 2nd
 |Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|
