@@ -1,8 +1,3 @@
-<!--
- * @Author: zhaoyang.liang
- * @Github: https://github.com/LzyRapx
- * @Date: 2020-02-01 16:17:23
- -->
 # Project-Euler
 ### My codes and solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
 
@@ -23,8 +18,8 @@
 |711|76|731|85|||||||
 |712|71|732|69|||||||
 |713|10|733|68|||||||
-|715|15|||||||||
-|716|20|||||||||
+|715|15|734|57|||||||
+|716|20|735|21|||||||
 |717|95||||||||
 |718|15|||||||||
 |720|32|||||||||
