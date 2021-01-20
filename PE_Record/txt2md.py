@@ -1,10 +1,10 @@
 
+# read context from lzyrapx_history
 history_filename = "lzyrapx_history.txt"
 
 with open(history_filename) as f:
     content = f.readlines()
 content = [x.strip() for x in content]
-
 
 markdown_filename = "README.md"
 
