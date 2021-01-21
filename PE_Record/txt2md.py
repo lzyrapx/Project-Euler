@@ -16,7 +16,7 @@ with open(markdown_filename, 'r+') as f:
 
 # write new context
 writer = open(markdown_filename,'w')
-writer.write("|Problem ID|Date|time|\n")
+writer.write("|Problem ID|Date|Time|\n")
 writer.write("|------:|---:|------:|\n")
 for line in content:
     problem_id = line.split(" ")[0]
