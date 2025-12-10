@@ -1,11 +1,10 @@
 # Project-Euler
-### My codes and solutions on [Project Euler](https://projecteuler.net/archives) had been removed because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
 
-#### This Repo will not share any solutions but I will share my math library as soon as possible.
+#### This Repo will not share any solutions because of its [rules](https://projecteuler.chat/viewtopic.php?f=50&t=1356).
 
 ![Project Euler](https://projecteuler.net/profile/lzyrapx.png)
 
-#### max(Rank) = 2nd
+#### highest(Rank) = 1st
 |Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|Problem|Rank|
 |------:|---:|------:|---:|------:|---:|------:|---:|------:|---:|
 |704|18|722|15|740|84|759|62|776|63|
